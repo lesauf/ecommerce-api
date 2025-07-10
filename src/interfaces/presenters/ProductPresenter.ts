@@ -5,7 +5,7 @@
  * to the client in a suitable format.
  */
 
-import { Product } from '../../domain/entities/Product';
+import { Product } from '@domain/entities/Product';
 
 export class ProductPresenter {
   present(product: Product): any {

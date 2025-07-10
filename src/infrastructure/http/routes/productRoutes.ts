@@ -6,10 +6,10 @@
  */
 
 import { Router } from 'express';
-import { ProductController } from '../../../interfaces/controllers/ProductController';
-import { GetProductUseCase } from '../../../application/useCases/product/GetProductUseCase';
-import { InMemoryProductRepository } from '../../database/repositories/InMemoryProductRepository';
-import { ProductPresenter } from '../../../interfaces/presenters/ProductPresenter';
+import { ProductController } from '@interfaces/controllers/ProductController';
+import { GetProductUseCase } from '@application/useCases/product/GetProductUseCase';
+import { InMemoryProductRepository } from '@infrastructure/database/repositories/InMemoryProductRepository';
+import { ProductPresenter } from '@interfaces/presenters/ProductPresenter';
 
 // Create router
 const productRouter = Router();

@@ -6,8 +6,8 @@
  */
 
 import { Request, Response } from 'express';
-import { ProductControllerInterface } from '../../application/interfaces/controllers/ProductControllerInterface';
-import { GetProductUseCase } from '../../application/useCases/product/GetProductUseCase';
+import { ProductControllerInterface } from '@application/interfaces/controllers/ProductControllerInterface';
+import { GetProductUseCase } from '@application/useCases/product/GetProductUseCase';
 import { ProductPresenter } from '../presenters/ProductPresenter';
 
 export class ProductController implements ProductControllerInterface {

@@ -6,8 +6,8 @@
  * between the interfaces layer and the domain layer.
  */
 
-import { Product } from '../../../domain/entities/Product';
-import { ProductRepositoryInterface } from '../../../domain/repositories/ProductRepositoryInterface';
+import { Product } from '@domain/entities/Product';
+import { ProductRepositoryInterface } from '@domain/repositories/ProductRepositoryInterface';
 
 export interface GetProductUseCaseRequest {
   id: string;

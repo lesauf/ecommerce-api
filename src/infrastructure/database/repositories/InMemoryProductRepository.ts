@@ -6,8 +6,8 @@
  * In a real application, this would be replaced with a database implementation.
  */
 
-import { Product } from '../../../domain/entities/Product';
-import { ProductRepositoryInterface } from '../../../domain/repositories/ProductRepositoryInterface';
+import { Product } from '@domain/entities/Product';
+import { ProductRepositoryInterface } from '@domain/repositories/ProductRepositoryInterface';
 
 export class InMemoryProductRepository implements ProductRepositoryInterface {
   private products: Map<string, Product> = new Map();
