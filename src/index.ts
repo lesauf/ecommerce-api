@@ -5,6 +5,8 @@
  * It imports and exports the Express server configured in the infrastructure layer.
  */
 
+import 'reflect-metadata';
+import './infrastructure/container';
 import app from './infrastructure/http/server';
 
 export default app;

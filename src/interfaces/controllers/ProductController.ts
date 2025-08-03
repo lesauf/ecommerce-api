@@ -9,12 +9,20 @@ import { Request, Response } from 'express';
 import { ProductControllerInterface } from '@application/interfaces/controllers/ProductControllerInterface';
 import { GetProductUseCase } from '@application/useCases/product/GetProductUseCase';
 import { ProductPresenter } from '../presenters/ProductPresenter';
+import { injectable, inject } from 'tsyringe';
 
+@injectable()
 export class ProductController implements ProductControllerInterface {
+  private readonly getProductUseCase: GetProductUseCase;
+  private readonly productPresenter: ProductPresenter;
+
   constructor(
-    private readonly getProductUseCase: GetProductUseCase,
-    private readonly productPresenter: ProductPresenter
-  ) {}
+    @inject(GetProductUseCase) getProductUseCase: GetProductUseCase,
+    @inject(ProductPresenter) productPresenter: ProductPresenter
+  ) {
+    this.getProductUseCase = getProductUseCase;
+    this.productPresenter = productPresenter;
+  }
 
   async getProduct(req: Request, res: Response): Promise<void> {
     try {

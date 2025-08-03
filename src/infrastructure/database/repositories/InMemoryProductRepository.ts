@@ -8,7 +8,9 @@
 
 import { Product } from '@domain/entities/Product';
 import { ProductRepositoryInterface } from '@domain/repositories/ProductRepositoryInterface';
+import { injectable } from 'tsyringe';
 
+@injectable()
 export class InMemoryProductRepository implements ProductRepositoryInterface {
   private products: Map<string, Product> = new Map();
 

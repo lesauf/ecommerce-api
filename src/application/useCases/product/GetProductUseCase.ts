@@ -8,6 +8,7 @@
 
 import { Product } from '@domain/entities/Product';
 import { ProductRepositoryInterface } from '@domain/repositories/ProductRepositoryInterface';
+import { injectable, inject } from 'tsyringe';
 
 export interface GetProductUseCaseRequest {
   id: string;
@@ -17,8 +18,15 @@ export interface GetProductUseCaseResponse {
   product: Product | null;
 }
 
+@injectable()
 export class GetProductUseCase {
-  constructor(private readonly productRepository: ProductRepositoryInterface) {}
+  private readonly productRepository: ProductRepositoryInterface;
+
+  constructor(
+    @inject("ProductRepositoryInterface") productRepository: ProductRepositoryInterface
+  ) {
+    this.productRepository = productRepository;
+  }
 
   async execute(request: GetProductUseCaseRequest): Promise<GetProductUseCaseResponse> {
     const { id } = request;

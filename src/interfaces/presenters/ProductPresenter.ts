@@ -6,7 +6,9 @@
  */
 
 import { Product } from '@domain/entities/Product';
+import { injectable } from 'tsyringe';
 
+@injectable()
 export class ProductPresenter {
   present(product: Product): any {
     return {

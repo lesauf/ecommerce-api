@@ -7,18 +7,13 @@
 
 import { Router } from 'express';
 import { ProductController } from '@interfaces/controllers/ProductController';
-import { GetProductUseCase } from '@application/useCases/product/GetProductUseCase';
-import { InMemoryProductRepository } from '@infrastructure/database/repositories/InMemoryProductRepository';
-import { ProductPresenter } from '@interfaces/presenters/ProductPresenter';
+import { container } from 'tsyringe';
 
 // Create router
 const productRouter = Router();
 
-// Create dependencies
-const productRepository = new InMemoryProductRepository();
-const getProductUseCase = new GetProductUseCase(productRepository);
-const productPresenter = new ProductPresenter();
-const productController = new ProductController(getProductUseCase, productPresenter);
+// Resolve dependencies using Tsyringe container
+const productController = container.resolve(ProductController);
 
 // Define routes
 productRouter.get('/:id', (req, res) => productController.getProduct(req, res));
