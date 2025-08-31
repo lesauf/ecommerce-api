@@ -12,13 +12,25 @@ interface AppError extends Error {
   code?: string;
 }
 
+import logger from '../../logger';
+
 export const errorHandler = (
   err: AppError,
   req: Request,
   res: Response,
   next: NextFunction
 ): void => {
-  console.error('Error:', err);
+  // Log error details to Winston (will go to error rotating file)
+  logger.error('HTTP request error', {
+    message: err.message,
+    stack: err.stack,
+    statusCode: err.statusCode || 500,
+    code: err.code,
+    method: req.method,
+    url: req.originalUrl,
+    ip: req.ip,
+    userAgent: req.headers['user-agent'],
+  });
 
   // Default error status and message
   const statusCode = err.statusCode || 500;

@@ -12,6 +12,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 
 import { productRouter } from './routes/productRoutes';
+import { logRouter } from './routes/logRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 import logger, { httpLogStream } from '../logger';
 
@@ -34,10 +35,16 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bo
 
 // Apply routes
 app.use('/api/products', productRouter);
+app.use('/', logRouter);
 
 // Health check endpoint
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok' });
+app.get('/health', (req, res, next) => {
+  try {
+    throw new Error('Health check forced error');
+    // res.status(200).json({ status: 'ok' });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Apply error handler middleware
