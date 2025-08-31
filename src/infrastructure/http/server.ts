@@ -13,6 +13,7 @@ import dotenv from 'dotenv';
 
 import { productRouter } from './routes/productRoutes';
 import { errorHandler } from './middlewares/errorHandler';
+import logger, { httpLogStream } from '../logger';
 
 // Load environment variables
 dotenv.config();
@@ -26,7 +27,8 @@ const PORT = process.env.PORT || 3000;
 // Apply middleware
 app.use(helmet()); // Security headers
 app.use(cors()); // Enable CORS
-app.use(morgan('dev')); // Request logging
+// Use morgan for HTTP access logs, piping to Winston so logs also go to files.
+app.use(morgan('combined', { stream: httpLogStream })); // Request logging via Winston
 app.use(express.json()); // Parse JSON request body
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request body
 
@@ -44,7 +46,8 @@ app.use(errorHandler);
 // Start server
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    // Use centralized logger instead of console for consistency and persistence
+    logger.info(`Server running on port ${PORT}`);
   });
 }
 
