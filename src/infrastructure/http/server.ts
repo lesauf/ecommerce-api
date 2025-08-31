@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bo
 
 // Apply routes
 app.use('/api/products', productRouter);
-app.use('/', logRouter);
+app.use('/api/', logRouter);
 
 // Health check endpoint
 app.get('/health', (req, res, next) => {
