@@ -13,6 +13,7 @@ import dotenv from 'dotenv';
 
 import { productRouter } from './routes/productRoutes';
 import { logRouter } from './routes/logRoutes';
+import { customerRouter } from '@interfaces/http/routes/customerRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 import logger, { httpLogStream } from '../logger';
 
@@ -35,6 +36,7 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bo
 
 // Apply routes
 app.use('/api/products', productRouter);
+app.use('/api/customers', customerRouter);
 app.use('/api/', logRouter);
 
 // Health check endpoint

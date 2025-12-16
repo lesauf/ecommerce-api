@@ -8,10 +8,10 @@
 
 import { injectable } from 'tsyringe';
 import { Product } from '@domain/entities/Product';
-import { ProductRepository } from './base/ProductRepository';
+import { ProductRepository } from '../../../domain/repositories/ProductRepository';
 
 @injectable()
-export class InMemoryProductRepository extends ProductRepository {
+export class InMemoryProductRepository implements ProductRepository {
   static ENGINE = 'memory';
   private products: Map<string, Product> = new Map();
 

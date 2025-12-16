@@ -12,6 +12,7 @@ export class Product {
   name!: string;
   description!: string;
   price!: number;
+  productCategoryId!: string;
   category!: ProductCategory;
   sku!: string;
   stockQuantity!: number;

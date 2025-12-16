@@ -9,7 +9,7 @@
 import { Product } from '@domain/entities/Product';
 import { injectable, inject } from 'tsyringe';
 import { ProductRepositoryToken } from '@application/tokens';
-import { ProductRepository } from '@infrastructure/database/repositories/base/ProductRepository';
+import { ProductRepository } from '@domain/repositories/ProductRepository';
 
 export interface GetProductUseCaseRequest {
   id: string;

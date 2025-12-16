@@ -7,6 +7,17 @@
 
 import { container } from 'tsyringe';
 import { autoDiscoverAndRegisterRepositories } from './autoProviders';
+import { ProductRepositoryToken, CustomerRepositoryToken } from '@application/tokens';
+import { InMemoryProductRepository } from '@infrastructure/database/repositories/InMemoryProductRepository';
+import { InMemoryCustomerRepository } from '@infrastructure/database/repositories/InMemoryCustomerRepository';
+
+container.register(ProductRepositoryToken, {
+  useClass: InMemoryProductRepository
+});
+
+container.register(CustomerRepositoryToken, {
+  useClass: InMemoryCustomerRepository
+});
 
 // Auto-discover repository implementations and alias the selected engine to the interface token
 autoDiscoverAndRegisterRepositories();
