@@ -14,6 +14,8 @@ import dotenv from 'dotenv';
 import { productRouter } from './routes/productRoutes';
 import { logRouter } from './routes/logRoutes';
 import { customerRouter } from '@interfaces/http/routes/customerRoutes';
+import { swaggerRouter } from '@interfaces/http/middlewares/swagger';
+
 import { errorHandler } from './middlewares/errorHandler';
 import logger, { httpLogStream } from '../logger';
 
@@ -38,6 +40,9 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bo
 app.use('/api/products', productRouter);
 app.use('/api/customers', customerRouter);
 app.use('/api/', logRouter);
+
+// Swagger Documentation
+app.use('/swagger-ui', swaggerRouter);
 
 // Health check endpoint
 app.get('/health', (req, res, next) => {

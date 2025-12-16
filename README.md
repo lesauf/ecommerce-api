@@ -50,8 +50,7 @@ The fundamental rule of clean architecture is that dependencies can only point i
 src/
 ├── domain/                 # Enterprise business rules
 │   ├── entities/           # Business entities
-│   ├── repositories/       # Repository interfaces
-│   └── valueObjects/       # Value objects
+│   └── repositories/       # Repository interfaces
 │
 ├── application/            # Application business rules
 │   ├── interfaces/         # Ports for the interfaces layer
