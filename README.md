@@ -70,6 +70,27 @@ src/
 └── config/                 # Application configuration
 ```
 
+## Automatic Repository Discovery
+This project auto-discovers repository implementations to avoid manual updates to providers.ts and tokens.ts.
+
+How it works:
+- Place implementations under src/infrastructure/database/repositories.
+- Each class should be @injectable() and declare a static ENGINE identifying the backend: e.g., static ENGINE = 'memory' | 'mongo' | 'maria'.
+- The container scans that folder at startup, registers each implementation under a per-engine token (Symbol.for(`ProductRepository:<engine>`)), and aliases the interface token to the selected engine based on DB_ENGINE.
+- Use cases keep injecting ProductRepositoryToken (stable).
+
+Switch engine:
+- Set environment variable DB_ENGINE=memory | mongo | maria. If the requested engine is not discovered, the container falls back to memory.
+
+Example implementation:
+
+```ts\n@injectable()
+export class InMemoryProductRepository implements ProductRepositoryInterface {
+  static ENGINE = 'memory';
+  // ...
+}
+```
+
 ## Getting Started
 
 ### Prerequisites

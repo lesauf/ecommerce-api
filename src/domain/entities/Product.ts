@@ -5,41 +5,21 @@
  * It contains only the business logic and rules that are specific to products.
  */
 
-import { ProductCategory } from '../valueObjects/ProductCategory';
-
-export interface ProductProps {
-  id?: string;
-  name: string;
-  description: string;
-  price: number;
-  category: ProductCategory;
-  sku: string;
-  stockQuantity: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+import { ProductCategory } from './ProductCategory';
 
 export class Product {
-  private readonly id: string;
-  private name: string;
-  private description: string;
-  private price: number;
-  private category: ProductCategory;
-  private sku: string;
-  private stockQuantity: number;
-  private readonly createdAt: Date;
-  private updatedAt: Date;
+  readonly id!: string;
+  name!: string;
+  description!: string;
+  price!: number;
+  category!: ProductCategory;
+  sku!: string;
+  stockQuantity!: number;
+  readonly createdAt: Date = new Date();
+  updatedAt: Date = new Date();
 
-  constructor(props: ProductProps) {
-    this.id = props.id || this.generateId();
-    this.name = props.name;
-    this.description = props.description;
-    this.price = props.price;
-    this.category = props.category;
-    this.sku = props.sku;
-    this.stockQuantity = props.stockQuantity;
-    this.createdAt = props.createdAt || new Date();
-    this.updatedAt = props.updatedAt || new Date();
+  constructor(props: Partial<Product>) {
+    Object.assign(this, props);
     
     this.validate();
   }

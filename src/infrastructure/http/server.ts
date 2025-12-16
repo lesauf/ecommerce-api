@@ -40,8 +40,8 @@ app.use('/api/', logRouter);
 // Health check endpoint
 app.get('/health', (req, res, next) => {
   try {
-    throw new Error('Health check forced error');
-    // res.status(200).json({ status: 'ok' });
+    // throw new Error('Health check forced error');
+    res.status(200).json({ status: 'ok' });
   } catch (err) {
     next(err);
   }

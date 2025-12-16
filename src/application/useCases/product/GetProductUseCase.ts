@@ -7,8 +7,9 @@
  */
 
 import { Product } from '@domain/entities/Product';
-import { ProductRepositoryInterface } from '@domain/repositories/ProductRepositoryInterface';
 import { injectable, inject } from 'tsyringe';
+import { ProductRepositoryToken } from '@application/tokens';
+import { ProductRepository } from '@infrastructure/database/repositories/base/ProductRepository';
 
 export interface GetProductUseCaseRequest {
   id: string;
@@ -20,10 +21,10 @@ export interface GetProductUseCaseResponse {
 
 @injectable()
 export class GetProductUseCase {
-  private readonly productRepository: ProductRepositoryInterface;
+  private readonly productRepository: ProductRepository;
 
   constructor(
-    @inject("ProductRepositoryInterface") productRepository: ProductRepositoryInterface
+    @inject(ProductRepositoryToken) productRepository: ProductRepository
   ) {
     this.productRepository = productRepository;
   }

@@ -6,12 +6,13 @@
  * In a real application, this would be replaced with a database implementation.
  */
 
-import { Product } from '@domain/entities/Product';
-import { ProductRepositoryInterface } from '@domain/repositories/ProductRepositoryInterface';
 import { injectable } from 'tsyringe';
+import { Product } from '@domain/entities/Product';
+import { ProductRepository } from './base/ProductRepository';
 
 @injectable()
-export class InMemoryProductRepository implements ProductRepositoryInterface {
+export class InMemoryProductRepository extends ProductRepository {
+  static ENGINE = 'memory';
   private products: Map<string, Product> = new Map();
 
   async findById(id: string): Promise<Product | null> {

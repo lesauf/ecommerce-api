@@ -6,13 +6,9 @@
  */
 
 import { container } from 'tsyringe';
-import { ProductRepositoryInterface } from '@domain/repositories/ProductRepositoryInterface';
-import { InMemoryProductRepository } from '@infrastructure/database/repositories/InMemoryProductRepository';
+import { autoDiscoverAndRegisterRepositories } from './autoProviders';
 
-// Register repositories
-container.registerSingleton<ProductRepositoryInterface>(
-  'ProductRepositoryInterface',
-  InMemoryProductRepository
-);
+// Auto-discover repository implementations and alias the selected engine to the interface token
+autoDiscoverAndRegisterRepositories();
 
 export { container };

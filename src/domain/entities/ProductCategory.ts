@@ -12,14 +12,12 @@ export interface ProductCategoryProps {
 }
 
 export class ProductCategory {
-  private readonly id: string;
-  private readonly name: string;
-  private readonly description: string;
+  readonly id!: string;
+  readonly name!: string;
+  readonly description: string = '';
 
-  constructor(props: ProductCategoryProps) {
-    this.id = props.id;
-    this.name = props.name;
-    this.description = props.description || '';
+  constructor(props: Partial<ProductCategory>) {
+    Object.assign(this, props);
 
     this.validate();
   }
